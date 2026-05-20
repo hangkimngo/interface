@@ -24,6 +24,10 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func decoderHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
 	input := r.FormValue("input")
 	data := PageData{
 		Input: input,
