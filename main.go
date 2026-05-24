@@ -23,16 +23,24 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, data)
 }
 
-func decoderHandler(w http.ResponseWriter, r *http.Request) {
+func processHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 	input := r.FormValue("input")
+	mode := r.FormValue("mode")
 	data := PageData{
 		Input: input,
 	}
-	result, err := utils.Multiline(input, false)
+	var result string
+	var err error
+	if mode == "decode" {
+		result,err = utils.Multiline(input,false)
+	} else if mode == "encode" {
+		result, err = utils.Multiline(input,true)
+	}
+
 	if err != nil {
 		data.Error = err
 		data.Status = 400
@@ -56,7 +64,7 @@ func main() {
 
 	http.HandleFunc("/", homeHandler)
 
-	http.HandleFunc("/decoder", decoderHandler)
+	http.HandleFunc("/process", processHandler)
 
 	fmt.Println("Server running at http://localhost:8080")
 

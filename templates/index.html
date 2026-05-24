@@ -7,9 +7,17 @@
 
 <h1>Art Decoder</h1>
 
-<form action="/decoder" method="POST">
+<form action="/process" method="POST">
 
     <textarea name="input" rows="10" cols="50">{{.Input}}</textarea>
+
+    <br><br>
+    
+    <input type="radio" name="mode" value="decode" checked>
+    Decode
+
+    <input type="radio" name="mode" value="encode">
+    Encode
 
     <br><br>
 
