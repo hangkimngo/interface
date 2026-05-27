@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Art Decoder</title>
+</head>
+<body>
+
+<h1>Art Decoder</h1>
+
+<form action="/processor" method="POST">
+
+    <textarea name="input" rows="10" cols="50">{{.Input}}</textarea>
+
+    <br><br>
+    
+    <input type="radio" name="mode" value="decode" checked>
+    Decode
+
+    <input type="radio" name="mode" value="encode">
+    Encode
+
+    <br><br>
+
+    <button type="submit">Generate</button>
+
+</form>
+
+<hr>
+
+<p>Status: {{.Status}}</p>
+
+{{if .Error}}
+<p style="color: red;">{{.Error}}</p>
+{{end}}
+
+
+{{if .Result}}
+<pre>{{.Result}}</pre>
+{{end}}
+
+</body>
+</html>
