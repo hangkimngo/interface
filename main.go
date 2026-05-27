@@ -11,19 +11,19 @@ type PageData struct {
 	Input  string
 	Result string
 	Error  error
-	Status int
+	Status string
 }
 
-var tmpl = template.Must(template.ParseFiles("templates/index.html"))
+var tmpl = template.Must(template.ParseFiles("html/index.html"))
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	data := PageData{
-		Status: 200,
+		Status: "HTTP200",
 	}
 	tmpl.Execute(w, data)
 }
 
-func decoderHandler(w http.ResponseWriter, r *http.Request) {
+func processorHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
@@ -35,7 +35,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 	result, err := utils.Multiline(input, false)
 	if err != nil {
 		data.Error = err
-		data.Status = 400
+		data.Status = "HTTP400"
 
 		w.WriteHeader(http.StatusBadRequest)
 
@@ -44,7 +44,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data.Result = "Decoded:\n" + result
-	data.Status = 202
+	data.Status = "HTTP202"
 
 	w.WriteHeader(http.StatusAccepted)
 
@@ -53,10 +53,12 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	http.HandleFunc("/", homeHandler)
 
-	http.HandleFunc("/decoder", decoderHandler)
+	http.HandleFunc("/processor", processorHandler)
 
 	fmt.Println("Server running at http://localhost:8080")
 

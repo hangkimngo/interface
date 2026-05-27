@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Art Decoder/ Encoder</title>
+    <link rel="stylesheet" href="/static/style.css" type="text/css">
+</head>
+<body>
+    <header class="header">
+        <h1>Art Decoder/ Encoder</h1>
+    </header>
+
+    <main>
+        <form action="/decoder" method="POST">
+            <input type ="radio" id="decoder" name="function" value="Decoder" >
+            <label for="decoder">Decoder</label></br>
+            <input type ="radio" id="encoder" name="function" value="Encoder" >
+            <label for="encoder">Encoder</label></br>
+            <textarea name="input" rows="10" cols="50">{{.Input}}</textarea>
+
+            <br><br>
+
+            <button type="submit">Generate</button>
+
+        </form>
+
+        <hr>
+
+        <p>Status: {{.Status}}</p>
+
+        {{if .Error}}
+        <p style="color: red;">{{.Error}}</p>
+        {{end}}
+
+
+        {{if .Result}}
+        <pre>{{.Result}}</pre>
+        {{end}}
+
+    </main>
+    <footer>
+        <p>Built with ❤️ using HTML & CSS by Hang.</p>
+    </footer>
+
+</body>
+</html>
