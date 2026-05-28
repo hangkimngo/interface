@@ -10,11 +10,14 @@
     </header>
 
     <main>
-        <form action="/decoder" method="POST">
-            <input type ="radio" id="decoder" name="function" value="Decoder" >
+        <form action="/processor" method="POST">
+            <input type ="radio" id="decoder" name="mode" value="decode" {{if eq .Mode "decode"}}checked{{end}}>
             <label for="decoder">Decoder</label></br>
-            <input type ="radio" id="encoder" name="function" value="Encoder" >
+            <input type ="radio" id="encoder" name="mode" value="encode" {{if eq .Mode "encode"}}checked{{end}}>
             <label for="encoder">Encoder</label></br>
+            <label for="max-pattern">Max Pattern</label>
+            <input type="number" id="max-pattern" name="max-pattern" min="1" max="10" value="{{.MaxPattern}}" placeholder="3">
+            <br><br>
             <textarea name="input" rows="10" cols="50">{{.Input}}</textarea>
 
             <br><br>

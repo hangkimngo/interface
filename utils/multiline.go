@@ -1,14 +1,10 @@
 package utils
 
 import (
-	"errors"
 	"strings"
 )
 
-func Multiline(text string, encode bool) (string, error) {
-	if text == "" {
-		return "", errors.New("Error: Input cannot be empty.")
-	}
+func Multiline(text string, encode bool, maxPattern int) (string, error) {
 	lines := strings.Split(text, "\n")
 
 	var processedLines []string
@@ -17,7 +13,7 @@ func Multiline(text string, encode bool) (string, error) {
 		var rowOutput string
 		var err error
 		if encode {
-			rowOutput, err = Encode(line)
+			rowOutput, err = Encode(line, maxPattern)
 		} else {
 			rowOutput, err = Decode(line)
 		}

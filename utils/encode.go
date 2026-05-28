@@ -1,13 +1,14 @@
 package utils
 
 import (
-	"strconv"
+	"errors"
+	"fmt"
 	"strings"
 )
 
-func Encode(input string) (string, error) {
+func Encode(input string, maxPattern int) (string, error) {
 	if input == "" {
-		return "", nil
+		return "", errors.New("Error: Input string is empty")
 	}
 
 	var result strings.Builder
@@ -19,13 +20,8 @@ func Encode(input string) (string, error) {
 
 		remaining := input[i:]
 
-		for size := 1; size <= 2 && size <= len(remaining)/2; size++ {
+		for size := 1; size <= maxPattern && size <= len(remaining)/2; size++ {
 			pattern := remaining[:size]
-
-			if strings.ContainsAny(pattern, "[]") {
-				continue
-			}
-
 			count := 1
 
 			for (count+1)*size <= len(remaining) &&
@@ -37,7 +33,7 @@ func Encode(input string) (string, error) {
 				originalLen := count * size
 
 				// single-char runs: encode only if long enough
-				if size == 1 && count < 4 {
+				if size == 1 && count < 3 {
 					continue
 				}
 
@@ -51,12 +47,8 @@ func Encode(input string) (string, error) {
 		}
 
 		if bestCount > 1 {
-			result.WriteString("[")
-			result.WriteString(strconv.Itoa(bestCount))
-			result.WriteString(" ")
-			result.WriteString(bestPattern)
-			result.WriteString("]")
-
+			encodedStr := fmt.Sprintf("[%d %s]", bestCount, bestPattern)
+			result.WriteString(encodedStr)
 			i += bestCount * len(bestPattern)
 		} else {
 			result.WriteByte(input[i])

@@ -46,3 +46,22 @@ button {
 button:hover { 
   background:#028a56; 
 }
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  max-width: 480px;
+  padding: 10px 12px;
+  margin-top: 8px;
+  border: 1px solid #ccd6df;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 1rem;
+}
+
+label {
+  display: block;
+  margin-top: 16px;
+  font-weight: 600;
+}

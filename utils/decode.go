@@ -35,6 +35,11 @@ func Decode(input string) (string, error) {
 		firstArg := content[:spaceIndex]
 		secondArg := content[spaceIndex+1:]
 
+		if firstArg == "" {
+			decodeErr = errors.New("Error: There is no first argument")
+			return ""
+		}
+
 		if secondArg == "" {
 			decodeErr = errors.New("Error: There is no second argument")
 			return ""
