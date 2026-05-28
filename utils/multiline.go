@@ -1,10 +1,14 @@
 package utils
 
 import (
+	"errors"
 	"strings"
 )
 
 func Multiline(text string, encode bool, maxPattern int) (string, error) {
+	if text == "" {
+		return "", errors.New("Error: Input string is empty")
+	}
 	lines := strings.Split(text, "\n")
 
 	var processedLines []string

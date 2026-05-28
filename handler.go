@@ -22,7 +22,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		Mode:       "decode",
 		MaxPattern: 3,
 	}
-	w.WriteHeader(http.StatusAccepted)
+	w.WriteHeader(http.StatusOK)
 	tmpl.Execute(w, data)
 }
 
@@ -48,10 +48,9 @@ func processorHandler(w http.ResponseWriter, r *http.Request) {
 		MaxPattern: maxPattern,
 	}
 
-	switch mode {
-	case "decode":
+	if mode == "decode" {
 		result, err = utils.Multiline(input, false, maxPattern)
-	case "encode":
+	} else {
 		result, err = utils.Multiline(input, true, maxPattern)
 	}
 

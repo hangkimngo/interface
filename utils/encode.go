@@ -1,14 +1,13 @@
 package utils
 
 import (
-	"errors"
 	"fmt"
 	"strings"
 )
 
 func Encode(input string, maxPattern int) (string, error) {
 	if input == "" {
-		return "", errors.New("Error: Input string is empty")
+		return "", nil
 	}
 
 	var result strings.Builder

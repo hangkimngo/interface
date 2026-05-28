@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Art Decoder/ Encoder</title>
     <link rel="stylesheet" href="/static/style.css" type="text/css">
 </head>
@@ -12,13 +13,12 @@
     <main>
         <form action="/processor" method="POST">
             <input type ="radio" id="decoder" name="mode" value="decode" {{if eq .Mode "decode"}}checked{{end}}>
-            <label for="decoder">Decoder</label></br>
+            <label for="decoder">Decoder</label><br>
             <input type ="radio" id="encoder" name="mode" value="encode" {{if eq .Mode "encode"}}checked{{end}}>
-            <label for="encoder">Encoder</label></br>
-            <label for="max-pattern">Max Pattern</label>
+            <label for="encoder">Encoder</label>
             <input type="number" id="max-pattern" name="max-pattern" min="1" max="10" value="{{.MaxPattern}}" placeholder="3">
-            <br><br>
-            <textarea name="input" rows="10" cols="50">{{.Input}}</textarea>
+            <label for="max-pattern">Max Pattern</label><br><br>
+            <textarea name="input" rows="20" cols="100">{{.Input}}</textarea>
 
             <br><br>
 
@@ -27,8 +27,6 @@
         </form>
 
         <hr>
-
-        <p>Status: {{.Status}}</p>
 
         {{if .Error}}
         <p style="color: red;">{{.Error}}</p>
