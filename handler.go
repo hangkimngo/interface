@@ -62,9 +62,9 @@ func processorHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if mode == "encode" {
-		data.Result = "Encoded:\n" + result
+		data.Result = result
 	} else {
-		data.Result = "Decoded:\n" + result
+		data.Result = result
 	}
 	w.WriteHeader(http.StatusAccepted)
 	tmpl.Execute(w, data)
