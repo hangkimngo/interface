@@ -11,7 +11,7 @@ func main() {
 
 	http.HandleFunc("/", homeHandler)
 
-	http.HandleFunc("/processor", processorHandler)
+	http.HandleFunc("/transformer", transformerHandler)
 
 	fmt.Println("Server running at http://localhost:8080")
 

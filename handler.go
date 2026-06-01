@@ -26,7 +26,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, data)
 }
 
-func processorHandler(w http.ResponseWriter, r *http.Request) {
+func transformerHandler(w http.ResponseWriter, r *http.Request) {
 	var result string
 	var err error
 	if r.Method != http.MethodPost {
