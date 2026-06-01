@@ -201,14 +201,12 @@ The decoder app can return errors for cases such as:
     └── multiline.go
 ```
 
-## Interface Design
+## 🎨 Interface Design
 
-The UI uses a soft pastel color palette:
-
-| Color       | Usage               |
-| ----------- | ------------------- |
-| Smoky Rose  | Headings and labels |
-| Royal Gold  | Output section      |
-| Jungle Teal | Buttons and accents |
-| Pearl Aqua  | Highlight elements  |
-| Thistle     | Borders and shadows |
+| Color | Preview | Usage |
+|---|---|---|
+| Smoky Rose | ![#8b635c](https://img.shields.io/badge/-%238b635c-8b635c?style=for-the-badge) | Headings and labels |
+| Royal Gold | ![#f0cf65](https://img.shields.io/badge/-%23f0cf65-f0cf65?style=for-the-badge) | Output section |
+| Jungle Teal | ![#4c8577](https://img.shields.io/badge/-%234c8577-4c8577?style=for-the-badge) | Buttons and accents |
+| Pearl Aqua | ![#a6ece0](https://img.shields.io/badge/-%23a6ece0-a6ece0?style=for-the-badge) | Highlight elements |
+| Thistle | ![#dbcbd8](https://img.shields.io/badge/-%23dbcbd8-dbcbd8?style=for-the-badge) | Borders and shadows |
