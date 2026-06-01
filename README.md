@@ -5,6 +5,10 @@
 
 ---
 
+## Screenshot
+
+![Art Interface](doc/screenshot.png)
+
 ## Features
 
 * Decode bracket patterns into repeated text
@@ -109,7 +113,7 @@ Hello !!!!!
 
 ---
 
-## 🔒 Encode Example
+## Encode Example
 
 Input:
 
