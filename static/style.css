@@ -151,7 +151,6 @@ button:hover {
   transform: translateY(-1px);
 }
 
-
 hr {
   border: none;
   height: 1px;
@@ -159,6 +158,15 @@ hr {
   margin: 30px 0;
 }
 
+.status {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.error {
+  font-size: 15px;
+  color: red;
+}
 .output {
   margin-top: 24px;
   padding: 22px;

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"html/template"
 	"interface/utils"
 	"net/http"
@@ -13,15 +14,21 @@ type PageData struct {
 	Input      string
 	Result     string
 	Error      error
+	Status     string
 }
 
 var tmpl = template.Must(template.ParseFiles("html/index.html"))
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	data := PageData{
-		Mode:       "decode",
-		MaxPattern: 3,
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
 	}
+	if r.Method != http.MethodGet {
+		http.Error(w, "405 Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	data := PageData{Status: "200 OK", MaxPattern: 3, Mode: "decode"}
 	w.WriteHeader(http.StatusOK)
 	tmpl.Execute(w, data)
 }
@@ -30,7 +37,7 @@ func transformerHandler(w http.ResponseWriter, r *http.Request) {
 	var result string
 	var err error
 	if r.Method != http.MethodPost {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		http.Error(w, "405 Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 	input := r.FormValue("input")
@@ -46,16 +53,21 @@ func transformerHandler(w http.ResponseWriter, r *http.Request) {
 		Mode:       mode,
 		Input:      input,
 		MaxPattern: maxPattern,
+		Status:     "202 Accepted",
 	}
 
-	if mode == "decode" {
+	switch mode {
+	case "decode":
 		result, err = utils.Multiline(input, false, maxPattern)
-	} else {
+	case "encode":
 		result, err = utils.Multiline(input, true, maxPattern)
+	default:
+		err = errors.New("invalid mode")
 	}
 
 	if err != nil {
 		data.Error = err
+		data.Status = "400 Bad Request"
 		w.WriteHeader(http.StatusBadRequest)
 		tmpl.Execute(w, data)
 		return

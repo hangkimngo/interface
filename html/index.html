@@ -32,9 +32,11 @@
         </form>
 
         <hr>
-
+        {{if .Status}}
+        <p class="status">HTTP Response: {{.Status}}</p>
+        {{end}}
         {{if .Error}}
-        <p style="color: red;">{{.Error}}</p>
+        <p class="error" >{{.Error}}</p>
         {{end}}
 
         {{if .Result}}
