@@ -108,6 +108,16 @@ form {
 
 }
 
+.transformer-options label:has(input:checked) {
+    color: var(--jungle-teal);
+    #max-pattern {
+      color: var(--jungle-teal)
+    } 
+}
+
+
+
+
 #max-pattern {
   width: 55px;
   height: 36px;
@@ -120,6 +130,8 @@ form {
   font-size: 14px;
   font-weight: 600;
 }
+
+
 
 #max-pattern:focus {
   outline: none;
