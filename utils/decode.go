@@ -13,8 +13,6 @@ func Decode(input string) (string, error) {
 		return "", errors.New("Error: Square brackets are unbalanced")
 	}
 
-	// {	re := regexp.MustCompile(`\[(\d+) ([^\]]+)\]`)
-
 	re := regexp.MustCompile(`\[(.*?)\]`)
 	var decodeErr error
 
@@ -50,7 +48,10 @@ func Decode(input string) (string, error) {
 			decodeErr = errors.New("Error: The first argument is not a number")
 			return ""
 		}
-
+		if count <= 0 {
+			decodeErr = errors.New("Error: The first argument must be a positive integer")
+			return ""
+		}
 		return strings.Repeat(secondArg, count)
 	})
 
